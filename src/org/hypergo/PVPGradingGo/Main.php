@@ -20,6 +20,9 @@ class Main extends PluginBase{
          $this->apis[$n] = new $a();
       }
    }
+   protected function getApi($n){
+      return $this->apis[$n];
+   }
    public function onLoad(){
       $this->getLogger()->info("正在加载!");      
       @mkdir($this->getDataFolder(),0777,true);
