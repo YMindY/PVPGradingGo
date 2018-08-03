@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 name: PVPGradingGo!
 version: 1.0.0
 main: org\hypergo\PVPGradingGo\Main
@@ -9,5 +8,3 @@ api:
 - 2.0.0
 - 3.0.0
 - 4.0.0
-=======
->>>>>>> branch 'master' of https://git.coding.net/YxMingY/PVPGradingGo.git
