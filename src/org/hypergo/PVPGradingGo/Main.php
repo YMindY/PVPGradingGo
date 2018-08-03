@@ -12,6 +12,14 @@ class Main extends PluginBase{
    }
    public function onLoad(){
       $this->getLogger()->info("正在加载!");
+      
+      @mkdir($this->getDataFolder(),0777,true);
+      @mkdir($this->getDataFolder()."/Player",0777,true);
+      
+      $this->con = new Config($this->getDataFolder()."Shops.yml",Config::YAML,[
+      
+      
+      ])
    }
    public function onEnable(){
       self::$instance = $this;
