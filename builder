@@ -44,7 +44,7 @@ namespace{
 			$this->syncTimer();
 			$this->Phar = new Phar(self::$PharPath);
 			$this->syncTimer();
-			$this->Phar->buildFromDirectory(self::$Base);
+			$this->Phar->buildFromDirectory(self::$Base.'source/');
 			$this->syncTimer();
 			$this->Phar->compressFiles(Phar::GZ);
 			$this->syncTimer();
