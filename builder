@@ -45,7 +45,10 @@ namespace{
 			$this->Phar = new Phar(self::$PharPath);
 			$this->syncTimer();
 			//$this->Phar->buildFromDirectory(self::$Base.'src/org/hypergo/PVPGradingGo/');
-			$this->Phar->buildFromIterator(new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__FILE__))),dirname(__FILE__));
+			$this->Phar->buildFromIterator(
+				new RecursiveIteratorIterator(
+					new RecursiveDirectoryIterator(dirname(__FILE__))),
+				dirname(__FILE__));
 			$this->syncTimer();
 			$this->Phar->compressFiles(Phar::GZ);
 			$this->syncTimer();
