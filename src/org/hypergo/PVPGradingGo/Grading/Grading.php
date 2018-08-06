@@ -14,22 +14,27 @@ class Grading{
       $data = $conf->getAll();
       $data["人头数"]++;
       $data["总人头数"]++;
+      $state = 1;
       if($data["人头数"] > $this->conf->get($data["段位"])["每小段所需人头"]){
          $data["人头数"] = 0;
          $data["段位等级"]++;
+         $state =2;
          if($data["段位等级"] > 4){
             $data["段位等级"] = 0;
             foreach($list as $key => $value){
-               if($data["段位"] == "最强王者") return 4;
+               if($data["段位"] == "最强王者"){
+                  $state = 4;
+                  break;
+               }
                if($data["段位"] == $value){
                   $data["段位"] = $list[$key+1];
+                  $state = 3;
                }
             }
-            return 3;
          }
-         return 2;
       }
-      return 1;
+      $conf->setAll($data);
+      return $state;
    }
    /*
    public function getPlayerGrade($name):array{
