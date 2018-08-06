@@ -1,6 +1,8 @@
 <?php
 /* @dhdj 明显代码风格就是dhdj的嘛2333 */
+// dhdj6皮 dhdj能上天
 namespace org\hypergo\PVPGradingGo\Player;
+date_default_timezone_set('prc');
 
 use org\hypergo\PVPGradingGo\Main;
 use pocketmine\utils\Config;
@@ -28,7 +30,8 @@ class Player{
      		"段位"=>"倔强青铜",
      		"段位等级"=>1,
      		"人头数"=>1,
-     		"总人头数"=>1
+     		"总人头数"=>1,
+     		"领奖时间"=>""
      	));
 	}
 	private static function updateConfig(){
@@ -55,6 +58,13 @@ class Player{
 	public function getTotalKills(){
 		return self::$data["总人头数"];
 	}
+	public function getPrizeTime(){
+	   return self::$data["领奖时间"];
+	}
+   public function upPrizeTime(){
+      self::$data["领奖时间"] = date("y-m-d");
+      self::updateConfig();
+   }
 	public function upgradeLevel(){
 		self::$data["段位等级"]++;
 		self::initKills();

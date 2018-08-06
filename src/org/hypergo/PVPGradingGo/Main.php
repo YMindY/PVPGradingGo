@@ -2,14 +2,23 @@
 namespace org\hypergo\PVPGradingGo;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use org\hypergo\PVPGradingGo\grading\Grading;
+use org\hypergo\PVPGradingGo\Grading\Grading;
+use org\hypergo\PVPGradingGo\Prize\Prize;
 class Main extends PluginBase{
    private $ApiList = [
       "grading"=>Grading::class
    ];
    private $apis = [];
+   private $Listeners = [
+      Prize::class
+   ];
    private function registerEvents(Listener $l){
       $this->getServer()->getPluginManager()->registerEvents($l,$this);
+   }
+   private function registerListeners(){
+      foreach($this->Listeners as $l){
+         $this->registerEvents(new $l($this));
+      }
    }
    private function registerApis(){
       foreach($this->ApiList as $n => $a){
@@ -25,6 +34,7 @@ class Main extends PluginBase{
       $this->registerApis();
    }
    public function onEnable(){
+      $this->registerListeners();
       $this->getLogger()->notice("插件 已启动! \n>>§a特约魔改人员: dhdj大魔王\n§b开发人员: HypergoStdio(xMing,Creay)");
    }
    public function onDisable(){

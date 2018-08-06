@@ -15,7 +15,7 @@ class Grading{
      $this->main = $main;
      $this->registerConfig();
    }
-   /* @dhdj */
+   /* @dhdj 大魔王 魔法注入*/
    public function upPlayerGrade($name):int{
       $player = new \org\hypergo\PVPGradingGo\Player\Player($name);
       $player->updateKills();
@@ -38,7 +38,11 @@ class Grading{
    private function getDataFolder(){
       return $this->main->getDataFolder()."Grading/";
    }
-
+   
+   public function getRankData($rank){
+      return $this->conf->get($rank);
+   }
+      
    private function registerConfig(){
       @mkdir($this->getDataFolder(),0777,true);
       //一玩家一文件
