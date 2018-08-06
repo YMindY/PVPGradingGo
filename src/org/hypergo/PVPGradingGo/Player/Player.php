@@ -1,6 +1,6 @@
 <?php
 /* @dhdj 明显代码风格就是dhdj的嘛2333 */
-namespace org\hypergo\PVPGradingGo\Grading;
+namespace org\hypergo\PVPGradingGo\Player;
 
 use org\hypergo\PVPGradingGo\Main;
 use pocketmine\utils\Config;
