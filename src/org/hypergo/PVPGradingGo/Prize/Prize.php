@@ -17,7 +17,7 @@ class Prize implements Listener{
       if($date == "" || strtotime($date) < strtotime(date("y-m-d"))){
          $cmds = $this->main->getApi("grading")->getRankData($data->getRanking())["奖励"];
          foreach($cmds as $cmd){
-            $this->main->getServer()->dispatchCommand(new \pocketmine\command\ConsoleCommandSender(),$cmd);
+            $this->main->getServer()->dispatchCommand(new \pocketmine\command\ConsoleCommandSender(),str_replace("@p",$name,$cmd));
          }
          $player->sendMessage("你已获得[".$data->getRanking()."]段位的每日奖励");
       }
