@@ -21,7 +21,7 @@ class Grading{
       $player->updateKills();
       if(($kills=$player->getKills())>=$this->conf->get($data["段位"])["每小段所需人头"]){
          $list = array_keys($this->conf);
-         $player->upgradeLevel():
+         $player->upgradeLevel();
          if($player->getLevel()>4 && $player->getRanking()==end($list)){
             return $player::STAGE_RANK_MAX;
          }elseif($player->getLevel()>4){

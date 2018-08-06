@@ -25,7 +25,7 @@ class Main extends PluginBase{
       $this->registerApis();
    }
    public function onEnable(){
-      $this->getLogger()->notice("插件 已启动! \n§b开发人员: HypergoStdio(xMing,Creay)");
+      $this->getLogger()->notice("插件 已启动! \n>>§a特约魔改人员: dhdj大魔王\n§b开发人员: HypergoStdio(xMing,Creay)");
    }
    public function onDisable(){
       $this->getLogger()->warning("插件 已关闭!");
