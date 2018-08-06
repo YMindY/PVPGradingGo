@@ -5,12 +5,38 @@ use pocketmine\utils\Config;
 class Grading{
    private $main;
    private $conf;
-   public function upPlayerGrade($name){
-      
+   public function upPlayerGrade($name):int{
+      /*
+      1:加人头 2:升小段 3:升段位 4:段位已满
+      */
+      $list = array_keys($this->conf);
+      $conf = $this->createPlayerConfig($name);
+      $data = $conf->getAll();
+      $data["人头数"]++;
+      $data["总人头数"]++;
+      if($data["人头数"] > $this->conf->get($data["段位"])["每小段所需人头"]){
+         $data["人头数"] = 0;
+         $data["段位等级"]++;
+         if($data["段位等级"] > 4){
+            $data["段位等级"] = 0;
+            foreach($list as $key => $value){
+               if($data["段位"] == "最强王者") return 4;
+               if($data["段位"] == $value){
+                  $data["段位"] = $list[$key+1];
+               }
+            }
+            return 3;
+         }
+         return 2;
+      }
+      return 1;
    }
+   /*
    public function getPlayerGrade($name):array{
+      $grade = $this->getPlayerConfig($name);
       return array();
    }
+   */
    public function __construct($main){
      $this->main = $main;
      $this->registerConfig();
@@ -67,5 +93,16 @@ class Grading{
          ]
       ]
       ));
+   }
+   private function createPlayerConfig($name){
+     return new Config($this->getDataFolder()."玩家信息/".$name."yml",Config::YAML,array(
+     "段位"=>"倔强青铜",
+     "段位等级"=>1,
+     "人头数"=>1,
+     "总人头数"=>1
+     ));
+   }
+   private function getPlayerConfig($name){
+     return $this->createPlayerConfig($name)->getAll();
    }
  }
