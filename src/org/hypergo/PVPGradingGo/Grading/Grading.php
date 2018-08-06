@@ -15,7 +15,7 @@ class Grading{
      $this->main = $main;
      $this->registerConfig();
    }
-
+   /* @dhdj */
    public function upPlayerGrade($name):int{
       $player = new \org\hypergo\PVPGradingGo\Player\Player($name);
       $player->updateKills();
