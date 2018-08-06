@@ -1,54 +1,44 @@
 <?php
+
 namespace org\hypergo\PVPGradingGo\Grading;
+
 use org\hypergo\PVPGradingGo\Main;
+use org\hypergo\PVPGradingGo\Player\Player;
 use pocketmine\utils\Config;
+
 class Grading{
-   private $main;
-   private $conf;
-   public function upPlayerGrade($name):int{
-      /*
-      1:加人头 2:升小段 3:升段位 4:段位已满
-      */
-      $list = array_keys($this->conf);
-      $conf = $this->createPlayerConfig($name);
-      $data = $conf->getAll();
-      $data["人头数"]++;
-      $data["总人头数"]++;
-      $state = 1;
-      if($data["人头数"] > $this->conf->get($data["段位"])["每小段所需人头"]){
-         $data["人头数"] = 0;
-         $data["段位等级"]++;
-         $state =2;
-         if($data["段位等级"] > 4){
-            $data["段位等级"] = 0;
-            foreach($list as $key => $value){
-               if($data["段位"] == "最强王者"){
-                  $state = 4;
-                  break;
-               }
-               if($data["段位"] == $value){
-                  $data["段位"] = $list[$key+1];
-                  $state = 3;
-               }
-            }
-         }
-      }
-      $conf->setAll($data);
-      return $state;
-   }
-   /*
-   public function getPlayerGrade($name):array{
-      $grade = $this->getPlayerConfig($name);
-      return array();
-   }
-   */
+   private 
+   $main,
+   $conf;
+
    public function __construct($main){
      $this->main = $main;
      $this->registerConfig();
    }
+
+   public function upPlayerGrade($name):int{
+      $player = new \org\hypergo\PVPGradingGo\Player\Player($name);
+      $player->updateKills();
+      if(($kills=$player->getKills())>=$this->conf->get($data["段位"])["每小段所需人头"]){
+         $list = array_keys($this->conf);
+         $player->upgradeLevel():
+         if($player->getLevel()>4 && $player->getRanking()==end($list)){
+            return $player::STAGE_RANK_MAX;
+         }elseif($player->getLevel()>4){
+            $player->upgradeRanking($list);
+            return $player::STAGE_UPGRADE_RANK;
+         }else{
+            return $player::STAGE_UPGRADE_LEVEL;
+         }
+      }else{
+         return $player::STAGE_NO_UPGRADE;
+      }
+   }
+
    private function getDataFolder(){
       return $this->main->getDataFolder()."Grading/";
    }
+
    private function registerConfig(){
       @mkdir($this->getDataFolder(),0777,true);
       //一玩家一文件
@@ -98,16 +88,5 @@ class Grading{
          ]
       ]
       ));
-   }
-   private function createPlayerConfig($name){
-     return new Config($this->getDataFolder()."玩家信息/".$name."yml",Config::YAML,array(
-     "段位"=>"倔强青铜",
-     "段位等级"=>1,
-     "人头数"=>1,
-     "总人头数"=>1
-     ));
-   }
-   private function getPlayerConfig($name){
-     return $this->createPlayerConfig($name)->getAll();
    }
  }
