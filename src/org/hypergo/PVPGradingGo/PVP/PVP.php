@@ -55,9 +55,26 @@ class PVP implements Listener{
       //to do
    }
    public function onWorldChange(EntityTeleportEvent $event){
-      
+      $player = $event->getEntity();
+      if(!$player instanceof Player) return;
+      if(in_array($event->getTo()->getLevel()->getName(),$this->conf->get("pvp世界"))){
+         $player->removeAllEffects();
+         $player->setGameMode(0);
+      }
    }
    public function onEffect(EntityEffectAddEvent $event){
-      
+      $player = $event->getEntity();
+      if(!$player instanceof Player) return;
+      if(in_array($player->getLevel()->getName(),$this->conf->get("pvp世界"))){
+         $event->setCancelled();
+      }
+   }
+   public function onGameModeChange(PlayerGameModeChangeEvent $event){
+      $player = $event->getPlayer();
+      if(in_array($player->getLevel()->getName(),$this->conf->get("pvp世界"))){
+         if($event->getNewGameMode() != 0){
+            $event->setCancelled();
+         }
+      }
    }
 }

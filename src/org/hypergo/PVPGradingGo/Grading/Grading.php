@@ -10,9 +10,12 @@ class Grading{
    private 
    $main,
    $conf;
+   
+   private static $dataFolder;
 
    public function __construct($main){
      $this->main = $main;
+     self::$dataFolder = $this->main->getDataFolder()."Grading/";
      $this->registerConfig();
    }
    /* @dhdj 大魔王 魔法注入*/
@@ -35,8 +38,8 @@ class Grading{
       }
    }
 
-   private function getDataFolder(){
-      return $this->main->getDataFolder()."Grading/";
+   public static function getDataFolder(){
+      return self::$dataFolder;
    }
    
    public function getRankData($rank){

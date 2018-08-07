@@ -1,5 +1,5 @@
 name: PVPGradingGo!
-version: 1.0.0
+version: 1.0.0_alpha
 main: org\hypergo\PVPGradingGo\Main
 load: POSTWORLD
 author: HypergoStdio(chy23333,xMing)
@@ -8,3 +8,10 @@ api:
 - 2.0.0
 - 3.0.0
 - 4.0.0
+commands:
+  getrank:
+    description: "查询段位指令"
+    permission: getrank.command
+permissions:
+  getrank.command: 
+    default: true

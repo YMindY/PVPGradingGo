@@ -14,7 +14,7 @@ class Player{
 	$conf,
 	$data;
 
-	public const 
+	const 
 	STAGE_NO_UPGRADE=1,
 	STAGE_UPGRADE_LEVEL=2,
 	STAGE_UPGRADE_RANK=3,
@@ -26,10 +26,10 @@ class Player{
 		self::$data=self::$conf->getAll();
 	}
 	public function getAllData(){
-	   return "[".self::$data["段位"]."-".self::$data["段位等级"]."]\n 星数: ".self::$data["人头数"]."总击杀数: ".self::$data["总人头数"];
+	   return "[".self::$data["段位"]."--".self::$data["段位等级"]."]\n 星数: ".self::$data["人头数"]."总击杀数: ".self::$data["总人头数"];
 	}
 	private static function getConfig(){
-		return new Config($this->getDataFolder()."玩家信息/".self::$name.".yml",Config::YAML,array(
+		return new Config(\org\hypergo\PVPGradingGo\Grading\Grading::getDataFolder()."玩家信息/".self::$name.".yml",Config::YAML,array(
      		"段位"=>"倔强青铜",
      		"段位等级"=>1,
      		"人头数"=>1,
