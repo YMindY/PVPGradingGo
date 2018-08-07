@@ -11,7 +11,7 @@ class Main extends PluginBase{
    ];
    private $apis = [];
    private $Listeners = [
-      PVP::class
+      PVP::class,
       Prize::class
    ];
    private function registerEvents(Listener $l){

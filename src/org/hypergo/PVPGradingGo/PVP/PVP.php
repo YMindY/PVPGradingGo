@@ -5,7 +5,7 @@ use pocketmine\Player;
 use pocketmine\event\player\{PlayerGameModeChangeEvent};
 use pocketmine\event\entity\
 {
-   EntityTelePortEvent,
+   EntityTeleportEvent,
    EntityDamageEvent,
    EntityDamagebyEntityEvent,
    EntityEffectAddEvent
@@ -29,7 +29,7 @@ class PVP implements Listener{
       $player = $event->getEntity();
       $damager = $event->getDamager();
       if(!$player instanceof Player || !$damager instanceof Player) return;
-      if(in_array($event->getTo()->getLevel()->getName(),$this->conf->get("pvp世界"))){
+      if(in_array($event->getDamager()->getLevel()->getName(),$this->conf->get("pvp世界"))){
          if($event->getFinalDamage() >= $player->getHealth()){
             $up = $this->main->getApi("grading")->upPlayerGrade($damager->getName());
             $data = new \org\hypergo\PVPGradingGo\Player\Player($damager->getName());
@@ -54,7 +54,7 @@ class PVP implements Listener{
       }
       //to do
    }
-   public function onWorldChange(EntityTelePortEvent $event){
+   public function onWorldChange(EntityTeleportEvent $event){
       
    }
    public function onEffect(EntityEffectAddEvent $event){
