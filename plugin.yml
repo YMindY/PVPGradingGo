@@ -1,8 +1,8 @@
 name: PVPGradingGo!
-version: 1.0.0_alpha
+version: 1.0.0_alpha_1
 main: org\hypergo\PVPGradingGo\Main
 load: POSTWORLD
-author: HypergoStdio(chy23333,xMing)
+author: dhdj,HypergoStdio(xMing)
 api:
 - 1.0.0
 - 2.0.0

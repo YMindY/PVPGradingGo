@@ -19,6 +19,7 @@ class Prize implements Listener{
          foreach($cmds as $cmd){
             $this->main->getServer()->dispatchCommand(new \pocketmine\command\ConsoleCommandSender(),str_replace("@p",$name,$cmd));
          }
+         $data->upPrizeTime();
          $player->sendMessage("你已获得[".$data->getRanking()."]段位的每日奖励");
       }
    }

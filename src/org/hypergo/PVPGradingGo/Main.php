@@ -28,7 +28,7 @@ class Main extends PluginBase{
          $this->apis[$n] = new $a($this);
       }
    }
-   protected function getApi($n){
+   public function getApi($n){
       return $this->apis[$n];
    }
    public function onLoad(){

@@ -39,6 +39,7 @@ class Player{
 	}
 	private static function updateConfig(){
 		self::$conf->setAll(self::$data);
+		self::$conf->save();
 		return true;
 	}
 	private static function initKills(){
@@ -64,10 +65,10 @@ class Player{
 	public function getPrizeTime(){
 	   return self::$data["领奖时间"];
 	}
-   public function upPrizeTime(){
+ public function upPrizeTime(){
       self::$data["领奖时间"] = date("y-m-d");
       self::updateConfig();
-   }
+ }
 	public function upgradeLevel(){
 		self::$data["段位等级"]++;
 		self::initKills();

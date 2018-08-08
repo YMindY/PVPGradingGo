@@ -16,6 +16,7 @@ class PVP implements Listener{
    private $conf;
    public function __construct($main){
       $this->main = $main;
+      $this->registerConfig();
    }
    private function getDataFolder(){
       return $this->main->getDataFolder()."PVPworld/";
