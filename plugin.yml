@@ -1,5 +1,5 @@
 name: PVPGradingGo!
-version: 1.0.1_alpha_2
+version: 1.0.1_alpha_3
 main: org\hypergo\PVPGradingGo\Main
 load: POSTWORLD
 author: dhdj,HypergoStdio(xMing)

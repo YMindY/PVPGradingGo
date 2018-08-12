@@ -31,7 +31,7 @@ class Player{
 	private static function getConfig(){
 		return new Config(\org\hypergo\PVPGradingGo\Grading\Grading::getDataFolder()."玩家信息/".self::$name.".yml",Config::YAML,array(
      		"段位"=>"废铜烂铁",
-     		"段位等级"=>5,
+     		"段位等级"=>4,
      		"人头数"=>0,
      		"连杀数"=>0,
      		"总人头数"=>0,
@@ -92,10 +92,9 @@ class Player{
 	public function updateRanking($list){
 		self::initLevel();
 		foreach($list as $key => $value){
-		             var_dump(self::$data["段位"]);
-               var_dump($value);
                if(self::$data["段位"] == $value){
                   self::$data["段位"] = $list[$key+1];
+                  break;
                }
         }
         self::updateConfig();

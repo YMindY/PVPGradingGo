@@ -40,7 +40,7 @@ class PVP implements Listener{
    }
    private function noticeTip($message){
       foreach($this->main->getServer()->getOnlinePlayers() as $player){
-         $player->sendTip($message."\n\n\n\n\n\n\n\n\n\n");
+         $player->sendTitle("",$message."\n\n\n\n\n\n\n\n\n\n",5,12,5);
       }
    }
    public function onPVP(EntityDamageEvent $event){
@@ -84,7 +84,7 @@ class PVP implements Listener{
        $pname = $player->getName();
        $event->setDeathMessage($pname."被".$kname."打包成礼物送回了主城");
        $up = $this->main->getApi("grading")->upPlayerGrade($kname);
-       $data = new \org\hypergo\PVPGradingGo\Player\Player($pname);
+       $data = new \org\hypergo\PVPGradingGo\Player\Player($kname);
        $kills = $data->getMultiKills();
        $data->upMultiKills();
        if($kills <= 7){
