@@ -5,6 +5,7 @@ use pocketmine\event\Listener;
 use org\hypergo\PVPGradingGo\Grading\{Grading,GetRankCommand};
 use org\hypergo\PVPGradingGo\PVP\PVP;
 use org\hypergo\PVPGradingGo\Prize\Prize;
+use org\hypergo\PVPGradingGo\RankList\RankList;
 class Main extends PluginBase{
    private $ApiList = [
       "grading"=>Grading::class
@@ -13,7 +14,7 @@ class Main extends PluginBase{
    private $Listeners = [
       PVP::class,
       Prize::class,
-      GetRankCommand::class
+      RankList::class
    ];
    private function registerEvents(Listener $l){
       $this->getServer()->getPluginManager()->registerEvents($l,$this);

@@ -1,17 +1,22 @@
 name: PVPGradingGo!
-version: 1.0.1_alpha_3
+version: 1.1.0_alpha_0
 main: org\hypergo\PVPGradingGo\Main
 load: POSTWORLD
-author: dhdj,HypergoStdio(xMing)
+author: HypergoStdio(xMing),dhdj
 api:
 - 1.0.0
 - 2.0.0
 - 3.0.0
 - 4.0.0
 commands:
+  ranklist:
+    description: "添加pvp排行榜指令"
+    permission: ranklist.command
   getrank:
     description: "查询段位指令"
     permission: getrank.command
 permissions:
+  ranklist.command:
+    default: op
   getrank.command: 
     default: true

@@ -73,7 +73,7 @@ class PVP implements Listener{
       }
    }
    public function onKill(PlayerDeathEvent $event){
-       //此处参照Matt[SuperCopy]
+       //此处参照anseEND[SuperCopy]
        $cause = $event->getEntity()->getLastDamageCause();
        if(!$cause instanceof EntityDamageByEntityEvent || !($cause->getDamager() instanceof Player) || $cause->getDamager()->getGameMode() !== 0) return;
        $killer = $cause->getDamager();

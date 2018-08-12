@@ -9,9 +9,8 @@ use pocketmine\command\
    PluginCommand,
    CommandExecutor   
 };
-use pocketmine\event\player\PlayerCommandPreprocessEvent;
 
-class GetRankCommand implements Listener,CommandExecutor{
+class GetRankCommand implements CommandExecutor{
    private $main;
    public function __construct($main){
       $this->main = $main;
