@@ -18,8 +18,8 @@ class Player{
 	STAGE_NO_UPGRADE=1,
 	STAGE_UPGRADE_LEVEL=2,
 	STAGE_UPGRADE_RANK=3,
-	STAGE_RANK_MAX=4;
-
+	STAGE_RANK_MAX=4,
+ STAGE_JOIN_UPGRADING=5;
 	public function __construct($name){
 		self::$name=$name;
 		self::$conf=self::getConfig();
@@ -30,10 +30,11 @@ class Player{
 	}
 	private static function getConfig(){
 		return new Config(\org\hypergo\PVPGradingGo\Grading\Grading::getDataFolder()."玩家信息/".self::$name.".yml",Config::YAML,array(
-     		"段位"=>"倔强青铜",
-     		"段位等级"=>1,
-     		"人头数"=>1,
-     		"总人头数"=>1,
+     		"段位"=>"废铜烂铁",
+     		"段位等级"=>5,
+     		"人头数"=>0,
+     		"连杀数"=>0,
+     		"总人头数"=>0,
      		"领奖时间"=>""
      	));
 	}
@@ -50,6 +51,9 @@ class Player{
 		self::$data["段位等级"]=0;
 		return true;
 	}
+	public function initMultiKills(){
+	   self::$data["连杀数"]=0;
+	}
 	public function updateKills($Kills=1){
 		self::$data["人头数"]+=$Kills;
 		self::$data["总人头数"]+=$Kills;
@@ -65,10 +69,17 @@ class Player{
 	public function getPrizeTime(){
 	   return self::$data["领奖时间"];
 	}
+	public function getMultiKills(){
+	   return self::$data["连杀数"];
+	}
  public function upPrizeTime(){
       self::$data["领奖时间"] = date("y-m-d");
       self::updateConfig();
  }
+ 	public function upMultiKills(){
+		self::$data["连杀数"]++;
+		self::updateConfig();
+	}
 	public function upgradeLevel(){
 		self::$data["段位等级"]++;
 		self::initKills();
@@ -81,6 +92,8 @@ class Player{
 	public function updateRanking($list){
 		self::initLevel();
 		foreach($list as $key => $value){
+		             var_dump(self::$data["段位"]);
+               var_dump($value);
                if(self::$data["段位"] == $value){
                   self::$data["段位"] = $list[$key+1];
                }
