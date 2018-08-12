@@ -39,9 +39,7 @@ class PVP implements Listener{
       ));
    }
    private function noticeTip($message){
-      foreach($this->main->getServer()->getOnlinePlayers() as $player){
-         $player->sendTitle("",$message."\n\n\n\n\n\n\n\n\n\n",5,12,5);
-      }
+      $this->main->getServer()->broadcastMessage($message);
    }
    public function onPVP(EntityDamageEvent $event){
       if(!$event instanceof EntityDamagebyEntityEvent) return;
@@ -87,6 +85,7 @@ class PVP implements Listener{
        $data = new \org\hypergo\PVPGradingGo\Player\Player($kname);
        $kills = $data->getMultiKills();
        $data->upMultiKills();
+       $killer->sendTitle("",$kills."杀!\n\n\n\n\n\n\n\n\n\n",12,20,10);
        if($kills <= 7){
           if($kills > 1){
              $this->noticeTip(str_replace("@killer",$kname,$this->conf->get("击杀特效")[$kills."杀"]));
