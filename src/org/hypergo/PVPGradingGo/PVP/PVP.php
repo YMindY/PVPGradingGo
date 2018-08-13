@@ -15,6 +15,7 @@ use pocketmine\event\entity\
    EntityEffectAddEvent
 };
 use pocketmine\utils\Config;
+use org\hypergo\PVPGradingGo\RankList\RankList;
 class PVP implements Listener{
    private $main;
    private $conf;
@@ -95,7 +96,7 @@ class PVP implements Listener{
        }
        switch($up){
           case 2:
-             $killer->sendMessage("[PVP段位系统] 击杀成功! 段位等级(小段)提升!\n当前段位: ".$data->getRanking().$data->getLevel());
+             $killer->sendMessage("[PVP段位系统] 击杀成功! 段位等级(小段)提升!\n当前段位: ".$data->getRanking()."--".str_replace(["1","2","3","4","5","6","7","8","9","0"],["一","二","三","四","五","六","七","八","九","零"],$data->getLevel()));
           break;
           case 3:
              $killer->sendMessage("[PVP段位系统] 击杀成功! 段位晋级!\n当前段位: ".$data->getRanking());
@@ -107,6 +108,7 @@ class PVP implements Listener{
              $killer->sendMessage("[PVP段位系统] 击杀成功!你已进入晋级赛!\n 再击杀".($this->main->getApi("grading")->getRankData($data->getRanking())["晋级赛人头"])."个玩家即可晋级段位");
           break;
        }
+       RankList::upgradePlayer($kname,$data->getTotalKills());
        $ddata = new \org\hypergo\PVPGradingGo\Player\Player($pname);
        $ddata->initMultiKills();
        if($ddata->getMultiKills() > 3){

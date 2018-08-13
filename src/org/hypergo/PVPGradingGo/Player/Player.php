@@ -26,7 +26,7 @@ class Player{
 		self::$data=self::$conf->getAll();
 	}
 	public function getAllData(){
-	   return "[".self::$data["段位"]."--".self::$data["段位等级"]."]\n 星数: ".self::$data["人头数"]."总击杀数: ".self::$data["总人头数"];
+	   return str_replace(["1","2","3","4","5","6","7","8","9","0"],["一","二","三","四","五","六","七","八","九","零"],"[".self::$data["段位"]."--".self::$data["段位等级"]."段]\n 星数: ".self::$data["人头数"]."总击杀数: ".self::$data["总人头数"]);
 	}
 	private static function getConfig(){
 		return new Config(\org\hypergo\PVPGradingGo\Grading\Grading::getDataFolder()."玩家信息/".self::$name.".yml",Config::YAML,array(

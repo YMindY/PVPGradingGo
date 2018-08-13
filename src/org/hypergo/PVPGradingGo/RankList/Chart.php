@@ -15,8 +15,8 @@ use pocketmine\nbt\tag\DoubleTag;
 use pocketmine\nbt\tag\CompoundTag;
 
 class Chart extends Entity{
-   
-	public function __construct(Level $level,$x,$y,$z){
+ const NETWORK_ID=Item::NETWORK_ID;
+ public static function create(Level $level,$x,$y,$z){
 	  $nbt=new CompoundTag("",[
 			"Pos"=>new ListTag("Pos",[
 				new DoubleTag("",$x),
@@ -36,13 +36,13 @@ class Chart extends Entity{
 				]
 			)
 		]);
-		parent::__construct($level,$nbt);
-	}
+		return new Chart($level,$nbt);
+ }
 	
 	public function spawnTo(Player $player){
 	 $pk=new AddEntityPacket();
 		$pk->eid=$this->getId();
-		$pk->type=Item::NETWORK_ID;;
+		$pk->type=Item::NETWORK_ID;
 		$pk->x=$this->x;
 		$pk->y=$this->y;
 		$pk->z=$this->z;
