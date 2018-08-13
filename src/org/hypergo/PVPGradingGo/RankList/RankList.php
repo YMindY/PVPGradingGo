@@ -75,10 +75,12 @@ class RankList implements Listener,CommandExecutor{
    private function createList(string $pos){
       $data = explode(":",$pos);
       self::$list[$pos] = Chart::create($this->main->getServer()->getLevelbyName($data[3]),$data[0],$data[1],$data[2]);
-      $this->setListData($pos,"1");
+      //$this->setListData($pos,"1");
    }
    private function generateList(string $pos){
-      self::$list[$pos]->spawnToAll();
+      foreach($this->main->getServer()->getOnlinePlayers() as $player){
+	        $this->generateListToOne($pos,$player);
+      	}
    }
    private function generateListToOne(string $pos,Player $player){
       self::$list[$pos]->spawnTo($player);
@@ -116,7 +118,7 @@ class RankList implements Listener,CommandExecutor{
       $path = Grading::getDataFolder()."玩家信息/";
       $files = glob($path."*.yml");
       foreach($files as $file){
-         preg_match_all('/\/([^\/\n]*).yml/',$file,$name);
+         if(!preg_match_all('/\/([^\/\n]*).yml/',$file,$name)) return;
          $name = $name[1][0];
          $data = new Data($name);
          self::$player[$name] = $data->getTotalKills();
@@ -138,7 +140,7 @@ class RankList implements Listener,CommandExecutor{
    private static function createListData():string{
       $longest = longest(array_keys(self::$player));
       $black = createBlack($longest-3);
-            $str = "        ==PVP段位排行榜==\n排名 玩家".$black."段位等级    星数 杀人数";
+      $str = "        ==PVP段位排行榜==\n排名 玩家".$black."段位等级    星数 杀人数";
       $poi = 1;
       foreach(self::$player as $name=>$kills){
          $data = new Data($name);
@@ -167,6 +169,7 @@ class RankList implements Listener,CommandExecutor{
             "------------  --  --";
          }
       }
+      //var_dump($str);
       return (string)$str;
    }
    private static function freshList(){
@@ -195,7 +198,7 @@ class RankList implements Listener,CommandExecutor{
    }
    public function onTP(EntityTeleportEvent $event){
       if(!$event->getEntity() instanceof Player) return;
-      foreach(self::$list as $pos=>$list){
+      foreach(self::$list as $pos=>$list){         
          if($this->getListWorld($pos)->getName() == $event->getTo()->getLevel()->getName()){
             $this->generateListToOne($pos,$event->getEntity());
             self::freshList();

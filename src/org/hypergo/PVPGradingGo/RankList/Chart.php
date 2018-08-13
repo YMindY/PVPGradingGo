@@ -38,7 +38,12 @@ class Chart extends Entity{
 		]);
 		return new Chart($level,$nbt);
  }
-	
+	public function __construct($level,$nbt){
+		$this->setImmobile(true);
+		$this->setNameTagVisible(true);
+		$this->setNameTagAlwaysVisible(true);
+		parent::__construct($level,$nbt);
+	}
 	public function spawnTo(Player $player){
 	 $pk=new AddEntityPacket();
 		$pk->eid=$this->getId();
@@ -51,9 +56,6 @@ class Chart extends Entity{
 		$pk->metadata=$this->dataProperties;
 		$player->dataPacket($pk);
 		//$this->setDataFlag(Entity::DATA_FLAGS,Entity::DATA_FLAG_INVISIBLE,true);
-		$this->setImmobile(true);
-		$this->setNameTagVisible(true);
-		$this->setNameTagAlwaysVisible(true);
 		parent::spawnTo($player);
 	}
 }
