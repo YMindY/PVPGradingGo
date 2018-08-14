@@ -140,12 +140,12 @@ class RankList implements Listener,CommandExecutor{
    private static function createListData():string{
       $longest = longest(array_keys(self::$player));
       $black = createBlack($longest-3);
-      $str = "        ==PVP段位排行榜==\n排名 玩家".$black."段位等级    星数 杀人数";
+      $str = "§e        ==PVP段位排行榜==\n排名 玩家".$black."段位等级    星数 杀人数";
       $poi = 1;
       foreach(self::$player as $name=>$kills){
          $data = new Data($name);
          $str .= 
-         "\n ".
+         "\n§e ".
          $poi
          ."   ".
          $name
@@ -162,7 +162,7 @@ class RankList implements Listener,CommandExecutor{
       if($poi < 6){
          for(;$poi <= 6;$poi++){
             $str .= 
-            "\n "
+            "\n§e "
             .$poi.
             "   ----"
             .$black.

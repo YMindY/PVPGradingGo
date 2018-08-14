@@ -1,6 +1,6 @@
 <?php
 /* @dhdj 明显代码风格就是dhdj的嘛2333 */
-// dhdj6皮 dhdj能上天
+// dhdj留下的天坑xMing慢慢填
 namespace org\hypergo\PVPGradingGo\Player;
 date_default_timezone_set('prc');
 
@@ -53,6 +53,7 @@ class Player{
 	}
 	public function initMultiKills(){
 	   self::$data["连杀数"]=0;
+	   self::updateConfig();
 	}
 	public function updateKills($Kills=1){
 		self::$data["人头数"]+=$Kills;

@@ -56,6 +56,6 @@ class Chart extends Entity{
 		$pk->metadata=$this->dataProperties;
 		$player->dataPacket($pk);
 		//$this->setDataFlag(Entity::DATA_FLAGS,Entity::DATA_FLAG_INVISIBLE,true);
-		parent::spawnTo($player);
+		//parent::spawnTo($player);
 	}
 }

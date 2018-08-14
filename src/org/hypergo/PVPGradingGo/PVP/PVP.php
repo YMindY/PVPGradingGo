@@ -84,8 +84,8 @@ class PVP implements Listener{
        $event->setDeathMessage($pname."被".$kname."打包成礼物送回了主城");
        $up = $this->main->getApi("grading")->upPlayerGrade($kname);
        $data = new \org\hypergo\PVPGradingGo\Player\Player($kname);
-       $kills = $data->getMultiKills();
        $data->upMultiKills();
+       $kills = $data->getMultiKills();
        $killer->sendTitle("",$kills."杀!\n\n\n\n\n\n\n\n\n\n",12,20,10);
        if($kills <= 7){
           if($kills > 1){
@@ -110,10 +110,10 @@ class PVP implements Listener{
        }
        RankList::upgradePlayer($kname,$data->getTotalKills());
        $ddata = new \org\hypergo\PVPGradingGo\Player\Player($pname);
-       $ddata->initMultiKills();
        if($ddata->getMultiKills() > 3){
           $this->noticeTip($kname."终结了".$pname);
        }
+       $ddata->initMultiKills();
    }
    public function onWorldChange(EntityTeleportEvent $event){
       $player = $event->getEntity();
