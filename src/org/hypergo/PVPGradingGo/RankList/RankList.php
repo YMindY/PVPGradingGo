@@ -79,7 +79,10 @@ class RankList implements Listener,CommandExecutor{
    }
    private function generateList(string $pos){
       foreach($this->main->getServer()->getOnlinePlayers() as $player){
-	        $this->generateListToOne($pos,$player);
+         var_dump($this->getListWorld($pos)->getName() == $player->getLevel()->getName());
+         if($this->getListWorld($pos)->getName() == $player->getLevel()->getName()){
+	           $this->generateListToOne($pos,$player);
+	        }
       	}
    }
    private function generateListToOne(string $pos,Player $player){
@@ -88,6 +91,11 @@ class RankList implements Listener,CommandExecutor{
    private static function setListsData(string $data){
       foreach(self::$list as $pos=>$list){
          self::setListData($pos,$data);
+      }
+   }
+   public static function closeAllList(){
+      foreach(self::$list as $list){
+         $list->close();
       }
    }
    private static function setListData(string $pos,string $data){
