@@ -5,7 +5,7 @@ use org\hypergo\PVPGradingGo\Main;
 
 use pocketmine\Player;
 use pocketmine\entity\Entity;
-use pocketmine\entity\Item;
+use pocketmine\entity\object\ItemEntity as Item;
 use pocketmine\level\Level;
 use pocketmine\network\protocol\{AddEntityPacket,Info};
 use pocketmine\network\mcpe\protocol\{AddEntityPacket as mAddEntityPacket,Info as mInfo};
@@ -15,6 +15,10 @@ use pocketmine\nbt\tag\DoubleTag;
 use pocketmine\nbt\tag\CompoundTag;
 
 class Chart extends Entity{
+ 	/** @var float */
+	public $height = 0.0;
+	/** @var float */
+	public $width = 0.0;
  const NETWORK_ID=Item::NETWORK_ID;
  public static function create(Level $level,$x,$y,$z){
 	  $nbt=new CompoundTag("",[
@@ -39,12 +43,12 @@ class Chart extends Entity{
 		return new Chart($level,$nbt);
  }
 	public function __construct($level,$nbt){
+	 parent::__construct($level,$nbt);
 		$this->setImmobile(true);
 		$this->setNameTagVisible(true);
 		$this->setNameTagAlwaysVisible(true);
-		parent::__construct($level,$nbt);
 	}
-	public function spawnTo(Player $player){
+	public function spawnTo(Player $player):void{
 	 $pk=new AddEntityPacket();
 		$pk->eid=$this->getId();
 		$pk->type=Item::NETWORK_ID;

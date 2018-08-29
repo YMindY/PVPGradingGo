@@ -183,7 +183,7 @@ class RankList implements Listener,CommandExecutor{
    private static function freshList(){
       self::setListsData(self::createListData());
    }
-   public function onCommand(CommandSender $sender, Command $command, $label, array $args){
+   public function onCommand(\pocketmine\command\CommandSender $sender,\pocketmine\command\Command $command,string $label,array $args):bool{
       if($command->getName() == "ranklist"){
          if(!isset($args[0])){
             $sender->sendMessage("[PVP段位系统] 用法: /ranklist here");
